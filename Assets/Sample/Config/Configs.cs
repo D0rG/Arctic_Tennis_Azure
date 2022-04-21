@@ -130,4 +130,5 @@ public class Configs
     public bool LoggingToZion = false;
     public bool DrawOnlyMainSkeleton = true;
     public bool IsFpsDisplayActive = false;
+    public TrackerProcessingMode TrackerMode = 0; //1 - CPU; 2 - CUDA
 }

@@ -26,10 +26,11 @@ public class ConfigLoader : MonoBehaviour
         // Path.Combine combines strings into a file path.
         // Application.StreamingAssets points to Assets/StreamingAssets in the Editor, and the StreamingAssets folder in a build.
         string filePath = Path.Combine(Application.streamingAssetsPath, gameDataFileName);
+
 #if UNITY_EDITOR
-        ;//filePath = Path.Combine(Application)
         filePath = Path.Combine(Directory.GetCurrentDirectory(), "config.json");
 #endif
+
         if (File.Exists(filePath))
         {
             // Read the json from the file into a string.

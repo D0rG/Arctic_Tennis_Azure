@@ -6,7 +6,7 @@ using System.Text;
 
 public class PuppetAvatar : MonoBehaviour
 {
-    public TrackerHandler KinectDevice;
+    public SampleTrackerHandler KinectDevice;
     Dictionary<JointId, Quaternion> absoluteOffsetMap;
     Animator PuppetAnimator;
     public GameObject RootPosition;

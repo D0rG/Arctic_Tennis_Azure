@@ -2,7 +2,7 @@
 using UnityEngine;
 using Microsoft.Azure.Kinect.BodyTracking;
 
-public class TrackerHandler : MonoBehaviour
+public class SampleTrackerHandler : TrackerHandler
 {
     public Dictionary<JointId, JointId> parentJointMap;
     Dictionary<JointId, Quaternion> basisJointMap;
@@ -101,7 +101,7 @@ public class TrackerHandler : MonoBehaviour
         basisJointMap[JointId.EarRight] = spineHipBasis;
     }
 
-    public void updateTracker(BackgroundData trackerFrameData)
+    public override void updateTracker(BackgroundData trackerFrameData)
     {
         //this is an array in case you want to get the n closest bodies
         int closestBody = findClosestTrackedBody(trackerFrameData);

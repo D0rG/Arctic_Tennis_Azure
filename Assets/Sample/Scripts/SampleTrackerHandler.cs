@@ -104,7 +104,7 @@ public class SampleTrackerHandler : TrackerHandler
     public override void updateTracker(BackgroundData trackerFrameData)
     {
         //this is an array in case you want to get the n closest bodies
-        int closestBody = findClosestTrackedBody(trackerFrameData);
+        int closestBody = FindClosestTrackedBody(trackerFrameData);
 
         // render the closest body
         Body skeleton = trackerFrameData.Bodies[closestBody];
@@ -123,24 +123,6 @@ public class SampleTrackerHandler : TrackerHandler
             }
         }
         return retIndex;
-    }
-
-    private int findClosestTrackedBody(BackgroundData trackerFrameData)
-    {
-        int closestBody = -1;
-        const float MAX_DISTANCE = 5000.0f;
-        float minDistanceFromKinect = MAX_DISTANCE;
-        for (int i = 0; i < (int)trackerFrameData.NumOfBodies; i++)
-        {
-            var pelvisPosition = trackerFrameData.Bodies[i].JointPositions3D[(int)JointId.Pelvis];
-            Vector3 pelvisPos = new Vector3((float)pelvisPosition.X, (float)pelvisPosition.Y, (float)pelvisPosition.Z);
-            if (pelvisPos.magnitude < minDistanceFromKinect)
-            {
-                closestBody = i;
-                minDistanceFromKinect = pelvisPos.magnitude;
-            }
-        }
-        return closestBody;
     }
 
     public void turnOnOffSkeletons()

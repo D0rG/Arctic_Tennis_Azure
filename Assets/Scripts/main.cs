@@ -6,7 +6,7 @@ public class main : MonoBehaviour
 {
     // Handler for SkeletalTracking thread.
     [SerializeField] private TrackerProcessingMode TrackerMode;
-    [SerializeField] private TrackerHandler m_tracker;
+    [SerializeField] private TrackerHandler[] m_tracker;
     private SkeletalTrackingProvider m_skeletalTrackingProvider;
     [HideInInspector] public BackgroundData m_lastFrameData = new BackgroundData();
 
@@ -30,7 +30,10 @@ public class main : MonoBehaviour
             {
                 if (m_lastFrameData.NumOfBodies != 0)
                 {
-                    m_tracker.updateTracker(m_lastFrameData);
+                    foreach(var handler in m_tracker)
+                    {
+                        handler.updateTracker(m_lastFrameData);
+                    }
                 }
             }
         }

@@ -12,12 +12,21 @@ public class SkeletalTrackingProvider : BackgroundDataProvider
     TimeSpan initialTimestamp;
 
     private TrackerProcessingMode TrackerMode = TrackerProcessingMode.Cpu;
+    private readonly DeviceConfiguration kinectConfig = new DeviceConfiguration()
+    {
+        ColorFormat = ImageFormat.ColorBGRA32,
+        ColorResolution = ColorResolution.R720p,
+        DepthMode = DepthMode.NFOV_2x2Binned,
+        SynchronizedImagesOnly = true,
+        CameraFPS = FPS.FPS30,
+        DisableStreamingIndicator = false
+    };
 
     public SkeletalTrackingProvider(int id, TrackerProcessingMode TrackerMode): base(id)
     {
-        Debug.Log($"in the skeleton provider constructor [id: {id}]");
-        Debug.Log($"Tracker processing mode {TrackerMode}");
         this.TrackerMode = TrackerMode;
+        Debug.Log($"in the skeleton provider constructor [id: {id}]");
+        Debug.Log($"Tracker processing mode {this.TrackerMode}");
     }
 
     System.Runtime.Serialization.Formatters.Binary.BinaryFormatter binaryFormatter { get; set; } = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
@@ -35,18 +44,10 @@ public class SkeletalTrackingProvider : BackgroundDataProvider
             // Open device.
             using (Device device = Device.Open(id))
             {
-                device.StartCameras(new DeviceConfiguration()
-                {
-                    ColorFormat = ImageFormat.ColorBGRA32,
-                    ColorResolution = ColorResolution.R720p,
-                    DepthMode = DepthMode.NFOV_2x2Binned,
-                    SynchronizedImagesOnly = true,
-                    CameraFPS = FPS.FPS30
-                });
-            
+                device.StartCameras(kinectConfig);
                 
                 UnityEngine.Debug.Log("Open K4A device successful. id " + id + "sn:" + device.SerialNum );
-                var deviceCalibration = device.GetCalibration(DepthMode.NFOV_2x2Binned, ColorResolution.R720p);
+                var deviceCalibration = device.GetCalibration(kinectConfig.DepthMode, kinectConfig.ColorResolution);
             
                using (Tracker tracker = Tracker.Create(deviceCalibration, new TrackerConfiguration() { ProcessingMode = TrackerMode, SensorOrientation = SensorOrientation.Default }))
                {

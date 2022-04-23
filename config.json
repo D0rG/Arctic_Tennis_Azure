@@ -1,5 +1,5 @@
 {
-    "TrackerMode": 2, 
+    "TrackerMode": 2,
     "CenterOfMassJointId": 0,
     "LoggingToZion": false,
     "DrawOnlyMainSkeleton": true,

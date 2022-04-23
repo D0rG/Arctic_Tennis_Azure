@@ -1,4 +1,5 @@
 ﻿using Microsoft.Azure.Kinect.BodyTracking;
+using Microsoft.Azure.Kinect.Sensor;
 
 [System.Serializable]
 public class InitialAndEndStability

@@ -224,7 +224,7 @@ MonoBehaviour:
   TrackerMode: 2
   m_tracker:
   - {fileID: 485202370}
-  - {fileID: 485202371}
+  - {fileID: 0}
 --- !u!4 &485202368
 Transform:
   m_ObjectHideFlags: 0
@@ -263,7 +263,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c686050436a45e741b54e80f88997ac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawMode: 0
   dimensionsMode: 0
 --- !u!114 &485202371
 MonoBehaviour:
@@ -277,7 +276,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64543bf897d53704aad3c0c24269d817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textField: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

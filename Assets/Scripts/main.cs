@@ -32,7 +32,10 @@ public class main : MonoBehaviour
                 {
                     foreach(var handler in m_tracker)
                     {
-                        handler.updateTracker(m_lastFrameData);
+                        if (handler != null)
+                        {
+                            handler.updateTracker(m_lastFrameData);
+                        }
                     }
                 }
             }

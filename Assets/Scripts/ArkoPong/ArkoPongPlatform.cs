@@ -3,6 +3,7 @@ using UnityEngine;
 public class ArkoPongPlatform : MonoBehaviour
 {
     [SerializeField] private Player playerNum;
+    [SerializeField] private Directon directonType;
     [SerializeField] private float speed;
     [SerializeField] private float deathZone;
     [SerializeField] private HandlerChestTiltForAllBodies tiltHandler;
@@ -22,7 +23,7 @@ public class ArkoPongPlatform : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float angle = tiltHandler.angles[(int)playerNum];
+        float angle = tiltHandler.angles[(int)playerNum] * (int)directonType;
 
         if(Mathf.Abs(angle) < deathZone)
         {
@@ -45,5 +46,13 @@ public class ArkoPongPlatform : MonoBehaviour
     {
         first = 0, 
         second = 1
+    }
+
+    private enum Directon
+    {
+        [InspectorName("Save direction")]
+        Save = 1,
+        [InspectorName("Inverse direcrion")]
+        Inverse= -1
     }
 }

@@ -2334,6 +2334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: 0
+  directonType: -1
   speed: 0.008
   deathZone: 8
   tiltHandler: {fileID: 833765500}
@@ -3940,6 +3941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: 1
+  directonType: 1
   speed: 0.008
   deathZone: 8
   tiltHandler: {fileID: 833765500}

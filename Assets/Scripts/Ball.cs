@@ -19,7 +19,10 @@ public class Ball : MonoBehaviour
 
     protected virtual void VelocityFix()
     {
-        float velocityFactor = factorVelocity / rigidbody.velocity.magnitude;
-        rigidbody.velocity *= velocityFactor;
+        if (rigidbody.velocity != Vector3.zero)
+        {
+            float velocityFactor = factorVelocity / rigidbody.velocity.magnitude;
+            rigidbody.velocity *= velocityFactor;
+        }
     }
 }

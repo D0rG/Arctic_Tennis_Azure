@@ -3,10 +3,14 @@ using UnityEngine;
 public class ArkoPongBall : Ball
 {
     private Vector3 lastVelosity;
+    private Transform ballTransform;
+    private Vector3 spawnPos;
 
     private void Awake()
     {
-        rigidbody = gameObject.GetComponent<Rigidbody>();    
+        rigidbody = gameObject.GetComponent<Rigidbody>(); 
+        ballTransform = gameObject.transform;
+        spawnPos = ballTransform.position;
     }
 
     private void Start()
@@ -28,6 +32,7 @@ public class ArkoPongBall : Ball
         if(collision.gameObject.tag == "LeftWall" || collision.gameObject.tag == "RightWall")
         {
             MakeMissSound();
+            RespawnBall();
         }
         else
         {
@@ -40,5 +45,12 @@ public class ArkoPongBall : Ball
         Vector3 vector = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
         rigidbody.AddForce(vector);
         lastVelosity = rigidbody.velocity;
+    }
+
+    private void RespawnBall()
+    {
+        rigidbody.velocity = Vector3.zero;
+        ballTransform.position = spawnPos;
+        StartForce();
     }
 }

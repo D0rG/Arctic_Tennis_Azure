@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class ArkoPongBall : Ball
 {
-    private Vector3 lastVelosity;
     private Transform ballTransform;
     private Vector3 spawnPos;
 
@@ -38,13 +37,6 @@ public class ArkoPongBall : Ball
         {
             MakeHitSound();
         }
-    }
-
-    private void StartForce()
-    {
-        Vector3 vector = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
-        rigidbody.AddForce(vector);
-        lastVelosity = rigidbody.velocity;
     }
 
     private void RespawnBall()

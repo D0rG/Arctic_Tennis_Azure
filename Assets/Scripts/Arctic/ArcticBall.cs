@@ -1,14 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ArcticBall : Ball
 {
-    private Vector3 lastVelosity = Vector3.zero;
+    [SerializeField] private Transform spawnpos;
 
     private void Awake()
     {
         rigidbody = gameObject.GetComponent<Rigidbody>();    
+    }
+
+    private void Start()
+    {
+        StartForce();
     }
 
     private void FixedUpdate()
@@ -18,5 +21,32 @@ public class ArcticBall : Ball
             lastVelosity = rigidbody.velocity;
             VelocityFix();
         }
+    }
+
+    private void Respawn()
+    {
+        rigidbody.velocity = Vector3.zero;
+        gameObject.transform.position = spawnpos.position;
+        StartForce();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.tag == "Floor")
+        {
+            MakeMissSound();
+            Respawn();
+        }
+        else
+        {
+            MakeHitSound();
+        }
+    }
+
+    protected override void StartForce()
+    {
+        Vector3 vector = new Vector3(Random.Range(-0.5f, 0.5f), 1f, 0);
+        rigidbody.AddForce(vector);
+        lastVelosity = rigidbody.velocity;
     }
 }

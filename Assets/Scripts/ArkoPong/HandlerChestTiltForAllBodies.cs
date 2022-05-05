@@ -13,7 +13,7 @@ public class HandlerChestTiltForAllBodies : TrackerHandler
 
         for(int i = 0; i < 20; i++)
         {
-            angles.Add(float.NaN);
+            angles.Add(0);
         }
     }
 

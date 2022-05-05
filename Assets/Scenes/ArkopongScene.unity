@@ -2020,8 +2020,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: 0
+  speed: 0.008
+  deathZone: 8
   tiltHandler: {fileID: 833765500}
-  rigidbody: {fileID: 765686733}
+  maxZ: 3.8
+  minZ: -3.8
 --- !u!54 &765686733
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3608,9 +3611,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee970ae889505649abb153a0bf462cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNum: 0
+  playerNum: 1
+  speed: 0.008
+  deathZone: 8
   tiltHandler: {fileID: 833765500}
-  rigidbody: {fileID: 1376046752}
+  maxZ: 3.8
+  minZ: -3.8
 --- !u!54 &1376046752
 Rigidbody:
   m_ObjectHideFlags: 0

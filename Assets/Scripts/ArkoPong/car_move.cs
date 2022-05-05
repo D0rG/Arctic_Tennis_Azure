@@ -1,15 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class car_move : MonoBehaviour
-{
+{   
+    [SerializeField] private float speed;
+    [SerializeField] private float ttl;
 
-    public float speed;
+    private void Start()
+    {
+        Destroy(gameObject, ttl);
+    }
 
     void Update()
     {
-        gameObject.transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
-        Destroy(gameObject, 15);
+        gameObject.transform.Translate(Vector3.right * speed * Time.deltaTime);
     }
 }

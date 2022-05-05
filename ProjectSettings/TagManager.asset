@@ -8,6 +8,7 @@ TagManager:
   - Floor
   - LeftWall
   - RightWall
+  - Roof
   layers:
   - Default
   - TransparentFX

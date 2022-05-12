@@ -6,8 +6,12 @@ public class ArcticBall : Ball
 
     private void Awake()
     {
-        GameRunner.Instance.OnStartMatch.AddListener(() => Respawn());
         rigidbody = gameObject.GetComponent<Rigidbody>();    
+    }
+
+    private void Start()
+    {
+        GameRunner.Instance.OnStartMatch.AddListener(() => Respawn());
     }
 
     private void FixedUpdate()
@@ -44,5 +48,10 @@ public class ArcticBall : Ball
         Vector3 vector = new Vector3(Random.Range(-0.5f, 0.5f), 1f, 0);
         rigidbody.AddForce(vector);
         lastVelosity = rigidbody.velocity;
+    }
+
+    private void OnDestroy()
+    {
+        GameRunner.Instance.OnStartMatch.RemoveListener(() => Respawn());
     }
 }

@@ -15,14 +15,22 @@ public class ArkoPongPlatform : MonoBehaviour
     private Vector3 downLine;
     private Vector3 directonVector = Vector3.zero;
 
+    private bool matchStart = false;
+
     private void Awake()
     {
         upLine = new Vector3(transform.position.x, transform.position.y, maxZ);
         downLine = new Vector3(transform.position.x, transform.position.y, minZ);
     }
 
+    private void Start()
+    {
+        GameRunner.Instance.OnStartMatch.AddListener(() => matchStart = true);
+    }
+
     private void FixedUpdate()
     {
+        if (!matchStart) { return; }
         float angle = tiltHandler.angles[(int)playerNum] * (int)directonType;
 
         if(Mathf.Abs(angle) < deathZone)

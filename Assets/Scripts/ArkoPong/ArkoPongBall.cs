@@ -14,7 +14,7 @@ public class ArkoPongBall : Ball
 
     private void Start()
     {
-        StartForce();
+        GameRunner.Instance.OnStartMatch.AddListener(() => StartForce());
     }
 
     private void FixedUpdate()

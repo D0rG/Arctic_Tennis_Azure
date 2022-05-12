@@ -13,9 +13,13 @@ public class ArcticPlatform : MonoBehaviour
 
     private void Awake()
     {
-        GameRunner.Instance.OnStartMatch.AddListener(() => matchStart = true);
         platformTransform = gameObject.transform;
         rigidbody = gameObject.GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
+        GameRunner.Instance.OnStartMatch.AddListener(() => matchStart = true);
     }
 
     private void FixedUpdate()
@@ -53,5 +57,10 @@ public class ArcticPlatform : MonoBehaviour
             Vector3 move = new Vector3(x + direction * speed, platformTransform.position.y, 0);
             rigidbody.MovePosition(move);
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameRunner.Instance.OnStartMatch.RemoveListener(() => matchStart = true);   
     }
 }

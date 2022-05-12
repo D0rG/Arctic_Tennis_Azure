@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/ArctictennisScene.unity
+    guid: 76275ab44c864ab4693af450d14b40d7
   m_configObjects: {}

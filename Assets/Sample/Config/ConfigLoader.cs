@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using UnityEngine;
 
 public class ConfigLoader : MonoBehaviour
@@ -17,7 +16,7 @@ public class ConfigLoader : MonoBehaviour
     }
 
     // Name of scene config file.
-    private const string gameDataFileName = "config";
+    private const string gameDataFileName = "config.json";
 
     public Configs Configs { get; private set; } = new Configs();
 
@@ -25,10 +24,10 @@ public class ConfigLoader : MonoBehaviour
     {
         // Path.Combine combines strings into a file path.
         // Application.StreamingAssets points to Assets/StreamingAssets in the Editor, and the StreamingAssets folder in a build.
-        string filePath = Path.Combine(Application.streamingAssetsPath, gameDataFileName);
+        string filePath = Path.Combine(Application.dataPath, gameDataFileName);
 
 #if UNITY_EDITOR
-        filePath = Path.Combine(Directory.GetCurrentDirectory(), "config.json");
+        filePath = Path.Combine(Directory.GetCurrentDirectory(), gameDataFileName);
 #endif
 
         if (File.Exists(filePath))

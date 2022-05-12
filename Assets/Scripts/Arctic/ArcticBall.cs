@@ -6,12 +6,8 @@ public class ArcticBall : Ball
 
     private void Awake()
     {
+        GameRunner.Instance.OnStartMatch.AddListener(() => Respawn());
         rigidbody = gameObject.GetComponent<Rigidbody>();    
-    }
-
-    private void Start()
-    {
-        StartForce();
     }
 
     private void FixedUpdate()

@@ -9,16 +9,18 @@ public class ArcticPlatform : MonoBehaviour
     private Rigidbody rigidbody;
     private const float rightWall = 36.36f;
     private const float leftWall = 17.9f;
+    private bool matchStart = false;
 
     private void Awake()
     {
+        GameRunner.Instance.OnStartMatch.AddListener(() => matchStart = true);
         platformTransform = gameObject.transform;
         rigidbody = gameObject.GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
     {
-        if (Mathf.Abs(chestTilt.angle) > chestTiltDeathZone)
+        if ((Mathf.Abs(chestTilt.angle) > chestTiltDeathZone) && matchStart)
         {
             Move(chestTilt.angle);
         }

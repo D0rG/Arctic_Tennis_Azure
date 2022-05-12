@@ -718,6 +718,7 @@ GameObject:
   - component: {fileID: 729080983}
   - component: {fileID: 729080982}
   - component: {fileID: 729080981}
+  - component: {fileID: 729080985}
   m_Layer: 0
   m_Name: Kinect
   m_TagString: Untagged
@@ -778,6 +779,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &729080985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 729080980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821af82f3eb757d4993f1da1bb0e50f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTime: 10
+  OnStartMatch:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &741918485
 GameObject:
   m_ObjectHideFlags: 0

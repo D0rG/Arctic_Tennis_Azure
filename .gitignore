@@ -69,3 +69,4 @@ Assets/Photon/
 /Assets/Plugins
 /Assets/Packages
 *.onnx
+*.zip

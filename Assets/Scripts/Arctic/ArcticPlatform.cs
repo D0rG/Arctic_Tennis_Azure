@@ -20,6 +20,9 @@ public class ArcticPlatform : MonoBehaviour
     private void Start()
     {
         GameRunner.Instance.OnStartMatch.AddListener(() => matchStart = true);
+        var settings = StatrupSettings.instance.settings;
+        speed *= settings.platformSpeed;
+        transform.localScale *= settings.platformSize;
     }
 
     private void FixedUpdate()

@@ -4,7 +4,7 @@ public class Ball : MonoBehaviour
 {
     [SerializeField] protected AudioSource hitSound;
     [SerializeField] protected AudioSource missSound;
-    [SerializeField][Range(0, 25)] private float factorVelocity;
+    [SerializeField][Range(0, 25)] protected float factorVelocity;
     protected Rigidbody rigidbody;
     protected Vector3 lastVelosity;
 

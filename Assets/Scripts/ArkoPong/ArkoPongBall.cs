@@ -15,6 +15,9 @@ public class ArkoPongBall : Ball
     private void Start()
     {
         GameRunner.Instance.OnStartMatch.AddListener(() => StartForce());
+        var settings = StatrupSettings.instance.settings;
+        factorVelocity *= settings.ballSpeed;
+        transform.localScale *= settings.ballSize;
     }
 
     private void FixedUpdate()

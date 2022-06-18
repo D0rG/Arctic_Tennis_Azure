@@ -26,6 +26,9 @@ public class ArkoPongPlatform : MonoBehaviour
     private void Start()
     {
         GameRunner.Instance.OnStartMatch.AddListener(() => matchStart = true);
+        var settings = StatrupSettings.instance.settings;
+        transform.localScale *= settings.platformSize;
+        speed *= settings.platformSpeed;
     }
 
     private void FixedUpdate()

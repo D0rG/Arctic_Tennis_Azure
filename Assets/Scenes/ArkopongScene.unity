@@ -2627,6 +2627,7 @@ GameObject:
   - component: {fileID: 833765498}
   - component: {fileID: 833765500}
   - component: {fileID: 833765501}
+  - component: {fileID: 833765502}
   m_Layer: 0
   m_Name: Kinect
   m_TagString: Untagged
@@ -2703,6 +2704,20 @@ MonoBehaviour:
   OnStartMatch:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &833765502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833765496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5664f8dd3a56bef4ba50abdbc1e16b0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instance: {fileID: 0}
+  FileName: ArkoSettings.json
 --- !u!4 &844469407 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5859722864208655573, guid: b4f73de7f78428d459e92814ef95dc8f, type: 3}

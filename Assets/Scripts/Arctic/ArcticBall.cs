@@ -6,12 +6,15 @@ public class ArcticBall : Ball
 
     private void Awake()
     {
-        rigidbody = gameObject.GetComponent<Rigidbody>();    
+        rigidbody = gameObject.GetComponent<Rigidbody>();
     }
 
     private void Start()
     {
         GameRunner.Instance.OnStartMatch.AddListener(() => Respawn());
+        var settings = StatrupSettings.instance.settings;
+        transform.localScale *= settings.ballSize;
+        factorVelocity *= settings.ballSpeed;
     }
 
     private void FixedUpdate()

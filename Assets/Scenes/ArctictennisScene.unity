@@ -719,6 +719,7 @@ GameObject:
   - component: {fileID: 729080982}
   - component: {fileID: 729080981}
   - component: {fileID: 729080985}
+  - component: {fileID: 729080986}
   m_Layer: 0
   m_Name: Kinect
   m_TagString: Untagged
@@ -795,6 +796,19 @@ MonoBehaviour:
   OnStartMatch:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &729080986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 729080980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5664f8dd3a56bef4ba50abdbc1e16b0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FileName: AtcticSettings
 --- !u!1 &741918485
 GameObject:
   m_ObjectHideFlags: 0

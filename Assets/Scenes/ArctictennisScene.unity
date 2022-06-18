@@ -808,7 +808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5664f8dd3a56bef4ba50abdbc1e16b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FileName: AtcticSettings
+  FileName: AtcticSettings.json
 --- !u!1 &741918485
 GameObject:
   m_ObjectHideFlags: 0

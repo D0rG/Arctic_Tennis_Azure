@@ -30,7 +30,7 @@ public class HandlerChestTiltForAllBodies : TrackerHandler
 
         for (int i = 0; i < 2; i++)
         {
-            angles[i] = calculateAngle(bodies[i]);
+            angles[i] = calculateAngleChest(bodies[i]);
         }
     }
 
@@ -99,7 +99,7 @@ public class HandlerChestTiltForAllBodies : TrackerHandler
         listed[y] = temp;  
     }
 
-    private float calculateAngle(Body body)
+    private float calculateAngleChest(Body body)
     {
         Vector2 pelvisPos = body.JointPositions2D[(int)JointId.Pelvis].ToUnityVector2();
         Vector2 chestPos = body.JointPositions2D[(int)JointId.SpineChest].ToUnityVector2();
@@ -107,5 +107,35 @@ public class HandlerChestTiltForAllBodies : TrackerHandler
         Vector2 directionToChest = chestPos - pelvisPos;
         float angle = Vector2.SignedAngle(directionUp, directionToChest);
         return -angle;
+    }
+    
+    //Not Tested
+    private float calculateAngleHand(Body body, PlayerSide playerSide)
+    {
+        int sholderId;
+        int elbowId;
+
+        if (playerSide == PlayerSide.Left)
+        {
+            sholderId = (int)JointId.ShoulderLeft;
+            elbowId = (int)JointId.ElbowLeft;
+        }
+        else
+        {
+            sholderId = (int)JointId.ShoulderRight;
+            elbowId = (int)JointId.ElbowRight;
+        }
+
+        Vector2 sholderPos = body.JointPositions2D[sholderId].ToUnityVector2();
+        Vector2 elbowPos = body.JointPositions2D[elbowId].ToUnityVector2();
+        Vector2 dirSide = new Vector2(sholderPos.x - 1, sholderPos.y) - sholderPos;
+        Vector2 dirToElbow = elbowPos - sholderPos;
+
+        return Vector2.SignedAngle(dirSide, dirToElbow);
+    }
+
+    private enum PlayerSide
+    {
+        Left, Right
     }
 }

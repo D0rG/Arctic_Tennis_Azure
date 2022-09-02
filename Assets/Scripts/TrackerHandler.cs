@@ -22,4 +22,11 @@ public abstract class TrackerHandler : MonoBehaviour
         }
         return closestBody;
     }
+
+    public virtual float FindBodyKinectDistance(Body body)
+    {
+        var pelvisPosition = body.JointPositions3D[(int)JointId.Pelvis];
+        Vector3 pelvisPos = new Vector3((float)pelvisPosition.X, (float)pelvisPosition.Y, (float)pelvisPosition.Z);
+        return pelvisPos.magnitude;
+    }
 }

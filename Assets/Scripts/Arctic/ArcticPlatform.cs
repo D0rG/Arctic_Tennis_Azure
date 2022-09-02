@@ -7,8 +7,8 @@ public class ArcticPlatform : MonoBehaviour
     [SerializeField] [Range(0, 10)] private float chestTiltDeathZone;
     private Transform platformTransform;
     private Rigidbody rigidbody;
-    private const float rightWall = 36.36f;
-    private const float leftWall = 17.9f;
+    [SerializeField] private float rightWall = 36.36f;
+    [SerializeField] private float leftWall = 17.9f;
     private bool matchStart = false;
 
     private void Awake()

@@ -1,12 +1,16 @@
+using System.Collections;
 using UnityEngine;
 
 public class ArcticBall : Ball
 {
-    [SerializeField] private Transform spawnpos;
+    [SerializeField] private GameObject spawnpos;
+    private Transform _spawnpos;
+
 
     private void Awake()
     {
         rigidbody = gameObject.GetComponent<Rigidbody>();
+        _spawnpos = spawnpos.transform;
     }
 
     private void Start()
@@ -29,7 +33,8 @@ public class ArcticBall : Ball
     private void Respawn()
     {
         rigidbody.velocity = Vector3.zero;
-        gameObject.transform.position = spawnpos.position;
+        gameObject.transform.position = _spawnpos.position;
+        transform.parent = spawnpos.transform;
         StartForce();
     }
 

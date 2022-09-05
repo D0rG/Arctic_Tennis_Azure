@@ -15,7 +15,7 @@ public class ArcticBall : Ball
 
     private void Start()
     {
-        GameRunner.Instance.OnStartMatch.AddListener(() => Respawn());
+        GameRunner.Instance.OnStartMatch.AddListener(() => ThrowBall());
         var settings = StatrupSettings.instance.settings;
         transform.localScale *= settings.ballSize;
         factorVelocity *= settings.ballSpeed;
@@ -35,6 +35,13 @@ public class ArcticBall : Ball
         rigidbody.velocity = Vector3.zero;
         gameObject.transform.position = _spawnpos.position;
         transform.parent = spawnpos.transform;
+        rigidbody.isKinematic = true;
+    }
+
+    private void ThrowBall()
+    {
+        transform.parent = null;
+        rigidbody.isKinematic = false;
         StartForce();
     }
 
@@ -44,6 +51,7 @@ public class ArcticBall : Ball
         {
             MakeMissSound();
             Respawn();
+            ThrowBall();
         }
         else
         {

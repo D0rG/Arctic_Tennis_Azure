@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class HandlerChestTiltForAllBodies : TrackerHandler
 {
-    public int NumOfBodies { private set; get;}
+    public int NumOfBodies { private set; get; }
     private List<Body> bodies = new List<Body>(20);
     public List<float> angles { private set; get; }
 
@@ -19,21 +19,32 @@ public class HandlerChestTiltForAllBodies : TrackerHandler
 
     public override void updateTracker(BackgroundData trackerFrameData)
     {
+        if (trackerFrameData.NumOfBodies < 2)
+        {
+            Debug.LogWarning("я не могу найти два тела.");
+            return;
+        }
+
         bodies.Clear();
-        for (int i = 0; i < (int)trackerFrameData.NumOfBodies; i++)
+        for (int i = 0; i < (int)trackerFrameData.NumOfBodies; i++) //ƒобавл€ем все видные киннекту тела, дл€ далнейшей сортировки.
         {
             bodies.Add(trackerFrameData.Bodies[i]);
         }
-        
-        ShakerSort(bodies);
-        PelvisSortAndClearList(bodies);
 
-        for (int i = 0; i < 2; i++)
+        ShakerSort(bodies);
+        RemoveNonPlayerBody(bodies);
+        PelvisSort(bodies);
+
+        for (int i = 0; i < bodies.Count; i++)
         {
-            angles[i] = calculateAngleChest(bodies[i]);
+            angles[i] = calculateAngleHand(bodies[i], (i == 0) ? PlayerSide.Left : PlayerSide.Right);
         }
     }
 
+    /// <summary>
+    /// Sort by distans to body.
+    /// </summary>
+    /// <param name="bodies"></param>
     public void ShakerSort(List<Body> bodies)
     {
         int left = 0;
@@ -42,12 +53,12 @@ public class HandlerChestTiltForAllBodies : TrackerHandler
 
         while (left < right)
         {
-            for(int i = left; i < right; i++)
+            for (int i = left; i < right; i++)
             {
                 ++count;
                 if (FindBodyKinectDistance(bodies[i]) > FindBodyKinectDistance(bodies[i + 1]))
                 {
-                    Swap(ref bodies, i, i + 1);
+                    bodies.Swap(i, i + 1);
                 }
             }
 
@@ -55,83 +66,70 @@ public class HandlerChestTiltForAllBodies : TrackerHandler
             for (int i = right; i > left; i--)
             {
                 ++count;
-                if(FindBodyKinectDistance(bodies[i - 1]) > FindBodyKinectDistance(bodies[i]))
+                if (FindBodyKinectDistance(bodies[i - 1]) > FindBodyKinectDistance(bodies[i]))
                 {
-                    Swap(ref bodies, i - 1, i);
+                    bodies.Swap(i - 1, i);
                 }
             }
             ++left;
         }
     }
 
-    public void PelvisSortAndClearList(List<Body> bodies)
+    /// <summary>
+    /// Leaves only the two closest bodies.
+    /// </summary>
+    /// <param name="bodies"></param>
+    private void RemoveNonPlayerBody(List<Body> bodies)
     {
-        if (bodies.Count >= 2)
+        List<Body> tmp = new List<Body>(2);
+        for (int i = 0; i < 2; i++)
         {
-            Debug.Log("Two or more bodies");
-            List<Body> tmp = new List<Body>(2);
-
-            for (int i = 0; i < 2; i++)
-            {
-                tmp.Add(bodies[i]);
-            }
-
-            var pelvisPositionFirst = tmp[0].JointPositions3D[(int)JointId.Pelvis];
-            var pelvisPositionScnd = tmp[1].JointPositions3D[(int)JointId.Pelvis];
-
-            if(pelvisPositionFirst.X > pelvisPositionScnd.X)
-            {
-                Swap(ref tmp, 0, 1);
-            }
-
-            bodies = tmp;
+            tmp.Add(bodies[i]);
         }
-        else
+        bodies = tmp;
+    }
+
+    /// <summary>
+    /// Select side.
+    /// </summary>
+    /// <param name="bodies"></param>
+    public void PelvisSort(List<Body> bodies)
+    {
+        var pelvisPositionFirst = bodies[0].JointPositions3D[(int)JointId.Pelvis];
+        var pelvisPositionScnd = bodies[1].JointPositions3D[(int)JointId.Pelvis];
+
+        if (pelvisPositionFirst.X > pelvisPositionScnd.X)
         {
-            Debug.Log("Cant find two or more bodies");
+            bodies.Swap(0, 1);
         }
     }
 
-    public void Swap<T>(ref List<T> listed, int x, int y)
-    {
-        T temp = listed[x];
-        listed[x] = listed[y];
-        listed[y] = temp;  
-    }
-
-    private float calculateAngleChest(Body body)
-    {
-        Vector2 pelvisPos = body.JointPositions2D[(int)JointId.Pelvis].ToUnityVector2();
-        Vector2 chestPos = body.JointPositions2D[(int)JointId.SpineChest].ToUnityVector2();
-        Vector2 directionUp = new Vector2(pelvisPos.x, pelvisPos.y + (-1)) - pelvisPos;
-        Vector2 directionToChest = chestPos - pelvisPos;
-        float angle = Vector2.SignedAngle(directionUp, directionToChest);
-        return -angle;
-    }
-    
-    //Not Tested
     private float calculateAngleHand(Body body, PlayerSide playerSide)
     {
         int sholderId;
-        int elbowId;
+        int wrist;
+        int calculationDir = 1;
 
         if (playerSide == PlayerSide.Left)
         {
             sholderId = (int)JointId.ShoulderLeft;
-            elbowId = (int)JointId.ElbowLeft;
+            wrist = (int)JointId.WristLeft;
         }
         else
         {
             sholderId = (int)JointId.ShoulderRight;
-            elbowId = (int)JointId.ElbowRight;
+            wrist = (int)JointId.WristRight;
+            calculationDir = -1;
         }
 
         Vector2 sholderPos = body.JointPositions2D[sholderId].ToUnityVector2();
-        Vector2 elbowPos = body.JointPositions2D[elbowId].ToUnityVector2();
-        Vector2 dirSide = new Vector2(sholderPos.x - 1, sholderPos.y) - sholderPos;
-        Vector2 dirToElbow = elbowPos - sholderPos;
+        Vector2 wirstPos = body.JointPositions2D[wrist].ToUnityVector2();
 
-        return Vector2.SignedAngle(dirSide, dirToElbow);
+        Vector2 dirSide = new Vector2(sholderPos.x + calculationDir, sholderPos.y) - sholderPos;
+        Vector2 dirToWirst = wirstPos - sholderPos;
+
+        float angle = Vector2.SignedAngle(dirSide, dirToWirst);
+        return angle * -1;
     }
 
     private enum PlayerSide

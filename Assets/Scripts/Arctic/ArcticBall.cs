@@ -56,6 +56,15 @@ public class ArcticBall : Ball
         else
         {
             MakeHitSound();
+            //ћ€ч улетает под 45 градусов от платформы, но только вверх, из за этого могут быть проблемы с ударом м€ча о платформу с боку, по этому подн€л нижную границу выше. » иногда это выглд€ит странно.
+            if (collision.gameObject.TryGetComponent(out ArcticPlatform platform))  
+            {
+                int dir = (rigidbody.velocity.x > 0) ? 1 : -1; // right - left
+                rigidbody.velocity = Vector3.zero;
+                Vector3 vector = new Vector3(dir, 1f, 0);
+                rigidbody.AddForce(vector);
+                lastVelosity = rigidbody.velocity;
+            }
         }
     }
 

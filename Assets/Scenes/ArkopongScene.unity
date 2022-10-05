@@ -2701,7 +2701,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 821af82f3eb757d4993f1da1bb0e50f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waitTime: 3
+  _waitTime: 10
   _text: {fileID: 1901192854}
   OnStartMatch:
     m_PersistentCalls:
@@ -5621,7 +5621,6 @@ GameObject:
   - component: {fileID: 1901192852}
   - component: {fileID: 1901192855}
   - component: {fileID: 1901192854}
-  - component: {fileID: 1901192853}
   m_Layer: 5
   m_Name: Timer
   m_TagString: Untagged
@@ -5648,19 +5647,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.000030518, y: -406.33}
   m_SizeDelta: {x: 1454, y: 823.33}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1901192853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1901192851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77dc3affc3386ea479b4d4f97f46b8eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: {fileID: 1901192854}
 --- !u!114 &1901192854
 MonoBehaviour:
   m_ObjectHideFlags: 0

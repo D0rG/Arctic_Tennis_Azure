@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Azure.Kinect.Sensor;
 
 public abstract class BackgroundDataProvider:IDisposable
 {
